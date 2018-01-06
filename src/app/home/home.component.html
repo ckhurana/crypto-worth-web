@@ -1,0 +1,29 @@
+<div class="container color-dark">
+  <div class="col">
+    <p>Add a cryptocurrency</p>
+  </div>
+  <div class="col">
+    <p>Your coin portfolio ({{ itemCount }})</p>
+  </div>
+</div>
+
+<div class="container color-light" [@cryptos]="cryptos.length">
+  <div class="col">
+    <p class="sm">Use this form to add a new cryptocurrency to the portfolio.</p>
+
+    <form>
+      <select class="list" name="crypto-type" [(ngModel)]="cryptoType">
+        <option selected>-- Select --</option>
+        <option *ngFor="let currency of currencies2" [value]="currency.symbol">{{ currency.name }}</option>
+      </select> <span>{{ cryptoType }}</span>
+      <!-- <input type="text" class="txt" name="crypto-type" placeholder="Enter Currency Symbol" [(ngModel)]="cryptoType"> -->
+      <input type="number" class="txt" name="crypto-volume" placeholder="Enter the volume of currency" [(ngModel)]="cryptoVol"/>
+      <input type="submit" class="btn" [value]="btnText" (click)="addCrypto()">
+    </form>
+  </div>
+  <div class="col">
+    <p class="crypto-container" *ngFor="let crypto of cryptos; let i = index" (click)="removeCrypto(i)">
+      {{ crypto.name }}: {{ crypto.volume }} {{ crypto.symbol }}
+    </p>
+  </div>
+</div>
